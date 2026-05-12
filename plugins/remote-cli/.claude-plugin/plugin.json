@@ -1,6 +1,6 @@
 {
   "name": "remote-cli",
-  "version": "v0.0.1",
+  "version": "v0.0.2",
   "description": "Skill that drives the `remotecli` binary against the Remote.com partner API.",
   "author": {
     "name": "Remote"

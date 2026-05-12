@@ -230,10 +230,10 @@ List payslips. Behaviour differs by token type:
 Download a payslip as PDF.
 
 ```bash
-./remote payslips download [--payslip-id <id>] [--out-file <path>] [--company-token <token>]
+./remote payslips download [--id <id>] [--out-file <path>] [--company-token <token>]
 ```
 
-Omitting `--payslip-id` opens an interactive picker. Default output path is the server filename or `./payslip-<id>.pdf`.
+Omitting `--id` opens an interactive picker. Default output path is the server filename or `./payslip-<id>.pdf`.
 
 ---
 
