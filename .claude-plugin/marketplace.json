@@ -1,0 +1,14 @@
+{
+  "name": "remote-cli",
+  "owner": {
+    "name": "Remote"
+  },
+  "plugins": [
+    {
+      "name": "remote-cli",
+      "source": "./plugins/remote-cli",
+      "description": "Tools and skills for interacting with the Remote.com partner API from the command line.",
+      "version": "v0.0.1"
+    }
+  ]
+}
