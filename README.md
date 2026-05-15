@@ -56,6 +56,6 @@ After installing, the `remote-cli` skill is available in Claude Code and knows h
 
 ## Version
 
-Current release: **v0.0.3**
+Current release: **v0.0.4**
 
 See the [Releases page](https://github.com/remoteoss/remote-cli/releases) for history.

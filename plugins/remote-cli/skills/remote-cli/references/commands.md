@@ -124,6 +124,76 @@ Get a single employment by ID.
 
 ---
 
+## `contracts`
+
+### `contracts list`
+
+List contracts (compensation snapshots) for a single employment. Use this to inspect the current and historical contract terms before submitting a contract amendment.
+
+```bash
+./remote contracts list [flags]
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--company-token` | string | Override active company token |
+| `--employment-id` | string | Employment to list contracts for (picker if omitted) |
+| `--only-active` | bool | Return only the active or last active contract (default `true`; pass `--only-active=false` to list all) |
+| `--columns` | string | Comma-separated column names for table output |
+
+Table columns: ID, Status, Country, Job Title, Effective.
+
+---
+
+## `contract-amendments`
+
+### `contract-amendments list`
+
+List contract amendments for the active company.
+
+```bash
+./remote contract-amendments list [flags]
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--company-token` | string | Override active company token |
+| `--employment-id` | string | Filter by employment ID |
+| `--status` | string | Filter by status: `submitted`, `in_review`, `done`, `canceled`, `deleted` |
+| `--columns` | string | Comma-separated column names for table output |
+| `--all` | bool | Fetch all pages |
+| `--page` | int | Page number (default: 1) |
+| `--page-size` | int | Results per page (default: 100) |
+
+Table columns: ID, Employment, Status, Reason, Effective, Submitted.
+
+### `contract-amendments show <id>`
+
+Show a single contract amendment by ID.
+
+```bash
+./remote contract-amendments show amend_abc123 [--company-token <token>]
+```
+
+### `contract-amendments create`
+
+Submit a contract amendment for an employment. **Always run `contracts list --employment-id <id>` first** to read the current terms — the amendment is a delta over the active contract, and the schema-driven form references current-state fields (salary, title, work hours, etc.).
+
+```bash
+./remote contract-amendments create [flags]
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--company-token` | string | Override active company token |
+| `--employment-id` | string | Employment to amend (picker if omitted; prefer resolving via `employments list --email` for autonomous use) |
+| `--contract-id` | string | Override the employment's `active_contract_id` (rarely needed) |
+| `--country` | string | Override the employment's country (3-letter ISO; rarely needed — pulled from the employment automatically) |
+
+The flow fetches the country-specific amendment JSON Schema, prompts for each field (with the current contract's values as defaults where the schema supports it), then shows a recap and a confirm prompt before submission. On confirm, the CLI POSTs to `/v1/contract-amendments` and returns the new `amendment_id` and `status`.
+
+---
+
 ## `expenses`
 
 ### `expenses list`
